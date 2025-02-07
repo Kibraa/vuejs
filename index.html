@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>App</title>
+</head>
+<body>
+    <div id="contenu"></div>
+    
+    <script type="module">
+        import { h, createApp } from "./node_modules/vue/dist/vue.esm-browser.prod.js";
+
+        const Formulaire = {
+            data() {
+                return {
+                    user: "",
+                    email: "",
+                    password: "",
+                    confirmpassword: "",
+                };
+            },
+            methods: {
+                envoyerFormulaire(event) {
+                    event.preventDefault();
+                    alert(`Utilisateur: ${this.user}\nEmail: ${this.email}`);
+                }
+            },
+            render() {
+                return h('form', { onSubmit: this.envoyerFormulaire }, [
+                    h('div', [
+                        h('label', { for: 'user' }, 'Utilisateur : '),
+                        h('input', {
+                            id: 'user',
+                            type: 'text',
+                            placeholder: 'Entrez votre nom',
+                            value: this.user,
+                            onInput: event => this.user = event.target.value
+                        })
+                    ]),
+                    h('div', [
+                        h('label', { for: 'email' }, 'Email : '),
+                        h('input', {
+                            id: 'email',
+                            type: 'email',
+                            placeholder: 'Entrez votre email',
+                            value: this.email,
+                            onInput: event => this.email = event.target.value
+                        })
+                    ]),
+                    h('div', [
+                        h('label', { for: 'password' }, 'Mot de passe : '),
+                        h('input', {
+                            id: 'password',
+                            type: 'password',
+                            placeholder: 'Entrez votre mot de passe',
+                            value: this.password,
+                            onInput: event => this.password = event.target.value
+                        })
+                    ]),
+                    h('div', [
+                        h('label', { for: 'confirmpassword' }, 'Confirmez le mot de passe : '),
+                        h('input', {
+                            id: 'confirmpassword',
+                            type: 'password',
+                            placeholder: 'Confirmez votre mot de passe',
+                            value: this.confirmpassword,
+                            onInput: event => this.confirmpassword = event.target.value
+                        })
+                    ]),
+                    h('button', { type: 'submit' }, 'S\'inscrire')
+                ]);
+            }
+        };
+
+        createApp(Formulaire).mount('#contenu');
+    </script>
+</body>
+</html>
